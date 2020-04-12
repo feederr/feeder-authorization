@@ -1,0 +1,12 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:stub
+
+logging:
+  level:
+    org.feeder: DEBUG
+    org.springframework: WARN
+    org.hibernate: WARN
