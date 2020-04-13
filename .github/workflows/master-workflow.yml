@@ -17,15 +17,17 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.13
+      - name: Checkstyle
+        run: ./mvnw checkstyle:check
       - name: Maven Package
-        run: mvn -B clean package -DskipTests
+        run: ./mvnw clean package -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Maven Verify
-        run: mvn -B clean verify
+      - name: Verify
+        run: ./mvnw clean verify
 
   docker:
-    name: Publish - Docker Hub
+    name: Publish
     runs-on: ubuntu-18.04
     needs: [test]
     env:
@@ -37,8 +39,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.13
-      - name: Maven Package
-        run: mvn -B clean package -DskipTests
+      - name: Package
+        run: ./mvnw clean package -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Login to Docker Hub
