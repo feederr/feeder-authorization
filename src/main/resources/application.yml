@@ -16,6 +16,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL57Dialect
         show_sql: true
         format_sql: true
+    open-in-view: false
 
   datasource:
     name: feeder-authorization-mysql
@@ -35,5 +36,6 @@ logging:
   level:
     org.feeder: DEBUG
     org.springframework: WARN
+    org.springframework.security: DEBUG
     org.hibernate: WARN
     liquibase: WARN
