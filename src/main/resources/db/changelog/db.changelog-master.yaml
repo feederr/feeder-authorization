@@ -17,3 +17,8 @@ databaseChangeLog:
   - include:
       file: user/20200419.REL1-11.add-unique-constraint-on-username.yaml
       relativeToChangelogFile: true
+
+  - include:
+      file: client/20200419.REL1-13.add-TEST-CLIENT.yaml
+      relativeToChangelogFile: true
+
