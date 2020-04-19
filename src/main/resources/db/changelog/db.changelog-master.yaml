@@ -1,5 +1,19 @@
 databaseChangeLog:
 
+  - logicalFilePath: no-path
+
   - include:
       file: client/20200417.REL1-10.create-client-table.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: client/20200419.REL1-11.add-unique-constraint-on-client-id.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: user/20200419.REL1-11.create-user-table.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: user/20200419.REL1-11.add-unique-constraint-on-username.yaml
       relativeToChangelogFile: true

@@ -1,0 +1,60 @@
+databaseChangeLog:
+
+  - logicalFilePath: no-path
+
+  - changeSet:
+      id: create-user
+      author: voroshen.av@gmail.com
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: us_id
+                  type: BINARY(16)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: us_acc_non_expired
+                  type: BIT(1)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: us_acc_non_locked
+                  type: BIT(1)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: us_authorities
+                  type: VARCHAR(1024)
+              - column:
+                  name: us_created
+                  defaultValueComputed: now()
+                  type: datetime
+              - column:
+                  constraints:
+                    nullable: false
+                  name: us_cred_non_expired
+                  type: BIT(1)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: us_enabled
+                  type: BIT(1)
+              - column:
+                  name: us_modified
+                  defaultValueComputed: now()
+                  type: datetime
+              - column:
+                  constraints:
+                    nullable: false
+                  name: us_pass
+                  type: VARCHAR(30)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: us_name
+                  type: VARCHAR(30)
+            tableName: user

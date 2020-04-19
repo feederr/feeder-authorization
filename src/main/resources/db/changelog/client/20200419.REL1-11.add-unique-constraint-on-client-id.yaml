@@ -1,0 +1,15 @@
+databaseChangeLog:
+
+  - logicalFilePath: no-path
+
+  - changeSet:
+      id: add-unique-constraint-on-client-id
+      author: voroshen.av@gmail.com
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: oc_client_id
+            indexName: idx_oauth_client_oc_client_id
+            tableName: oauth_client
+            unique: true
