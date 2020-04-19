@@ -35,24 +35,6 @@ public class ClientService extends
   }
 
   @Override
-  protected Client createEntity(ClientRequestVO vo, UUID id, Object... args) {
-
-    Client entity = mapper.toEntity(vo, id);
-
-    entity.setNew(true);
-
-    return repository.save(entity);
-  }
-
-  @Override
-  protected Client updateEntity(Client entity, ClientRequestVO vo, Object... args) {
-
-    mapper.updateEntity(entity, vo);
-
-    return repository.save(entity);
-  }
-
-  @Override
   protected Class<Client> getEntityClass() {
     return Client.class;
   }

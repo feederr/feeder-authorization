@@ -111,7 +111,7 @@ public class Client extends BaseEntity<UUID> implements ClientDetails {
 
     Set<GrantedAuthority> result = new LinkedHashSet<>();
 
-    if (Objects.nonNull(authorities) && !authorities.isEmpty()) {
+    if (!authorities.isEmpty()) {
       result = authorities.stream()
           .map(SimpleGrantedAuthority::new)
           .collect(Collectors.toCollection(LinkedHashSet::new));

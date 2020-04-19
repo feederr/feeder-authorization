@@ -1,0 +1,15 @@
+databaseChangeLog:
+
+  - logicalFilePath: no-path
+
+  - changeSet:
+      id: add-unique-constraint-on-username
+      author: voroshen.av@gmail.com
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: us_name
+            indexName: idx_user_us_name
+            tableName: user
+            unique: true
