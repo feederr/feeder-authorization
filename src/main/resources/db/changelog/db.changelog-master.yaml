@@ -1,0 +1,5 @@
+databaseChangeLog:
+
+  - include:
+      file: client/20200417.REL1-10.create-client-table.yaml
+      relativeToChangelogFile: true

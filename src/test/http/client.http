@@ -1,0 +1,53 @@
+### CREATE CLIENT
+
+POST {{authorization}}/client HTTP/1.1
+Content-Type: application/json
+
+{
+  "clientId": "TEST_CLIENT",
+  "clientSecret": "$2y$12$t2haD4a.iIsUUWKroOeFrejq5MVpL0kS.pyl7YhYNGJlEfWpXenCO",
+  "resourceIds": [
+    "authorization",
+    "application",
+    "statistics"
+  ],
+  "scope": [
+    "test_scope"
+  ],
+  "authorizedGrantTypes": [
+    "password",
+    "refresh_token",
+    "client_credentials",
+    "authorization_code"
+  ],
+  "authorities": [
+    "test_authority"
+  ],
+  "accessTokenExpiration": 900
+}
+
+> {%
+    if(response.body["id"]) {
+       client.global.set("clientId", response.body.id);
+    }
+%}
+
+### GET CLIENT
+
+GET {{authorization}}/client/{{clientId}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+### GET CLIENTS
+
+GET {{authorization}}/client HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+### DELETE CLIENT
+
+DELETE {{authorization}}/client/{{clientId}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+###

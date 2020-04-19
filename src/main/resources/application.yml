@@ -2,11 +2,38 @@ server:
   port: 8082
 
 spring:
+
+  profiles:
+    active: local
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+        dialect: org.hibernate.dialect.MySQL57Dialect
+        show_sql: true
+        format_sql: true
+
   datasource:
-    url: jdbc:h2:mem:stub
+    name: feeder-authorization-mysql
+    url: jdbc:mysql://${datasource.host:localhost}:${datasource.port:3322}/${datasource.schema:authorization}
+    username: feeder_authorization
+    password: testpwd
+
+  liquibase:
+    contexts: ${spring.profiles.active}
+    enabled: true
+
+feeder:
+  authorization:
+    bcrypt-strength: 12
 
 logging:
   level:
     org.feeder: DEBUG
     org.springframework: WARN
     org.hibernate: WARN
+    liquibase: WARN

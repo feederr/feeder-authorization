@@ -31,17 +31,28 @@
     <dependency>
       <groupId>org.feeder.api</groupId>
       <artifactId>core</artifactId>
-      <version>0.0.1</version>
+      <version>0.2.5</version>
     </dependency>
 
     <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <version>1.4.200</version>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
       <scope>runtime</scope>
     </dependency>
 
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.modelmapper</groupId>
+      <artifactId>modelmapper</artifactId>
+      <version>2.3.7</version>
+    </dependency>
+
   </dependencies>
+
 
   <build>
     <plugins>
@@ -58,7 +69,7 @@
         <configuration>
           <configLocation>google-checkstyle.xml</configLocation>
           <consoleOutput>true</consoleOutput>
-          <violationSeverity>warning</violationSeverity>
+<!--          <violationSeverity>warning</violationSeverity>-->
           <failOnViolation>true</failOnViolation>
         </configuration>
         <executions>
@@ -69,6 +80,17 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-maven-plugin</artifactId>
+        <configuration>
+          <outputChangeLogFile>src/main/resources/db/changelog/generated.yml</outputChangeLogFile>
+          <url>jdbc:mysql://localhost:3322/authorization</url>
+          <username>feeder_authorization</username>
+          <password>testpwd</password>
+        </configuration>
       </plugin>
 
     </plugins>
