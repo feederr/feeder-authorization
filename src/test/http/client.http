@@ -6,7 +6,7 @@ Authorization: Bearer {{accessToken}}
 
 {
   "clientId": "TEST_CLIENT",
-  "clientSecret": "$2y$12$t2haD4a.iIsUUWKroOeFrejq5MVpL0kS.pyl7YhYNGJlEfWpXenCO",
+  "clientSecret": "TEST_SECRET",
   "resourceIds": [
     "authorization",
     "application",

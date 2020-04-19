@@ -6,7 +6,7 @@ Authorization: Bearer {{accessToken}}
 
 {
   "username": "TEST_USER",
-  "password": "TEST_PASS",
+  "password": "TEST_PASSWORD",
   "authorities": [
     "test_authority"
   ]
