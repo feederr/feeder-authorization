@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.feeder.api.authorization.common.converter.SetToStringConverter;
+import org.feeder.api.core.converter.SetToStringConverter;
 import org.feeder.api.core.domain.BaseEntity;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
