@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 // CHECKSTYLE:OFF
@@ -35,14 +36,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     return super.authenticationManager();
   }
 
-  // NOTE: temporary solution to permit all incoming requests
   @Override
   @SneakyThrows
   protected void configure(HttpSecurity http) {
-    http
-        .csrf().disable()
-        .authorizeRequests()
-        .anyRequest().permitAll();
+
+    http.csrf().disable()
+        .sessionManagement()
+        .sessionCreationPolicy(SessionCreationPolicy.NEVER);
   }
 }
 // CHECKSTYLE:ON
