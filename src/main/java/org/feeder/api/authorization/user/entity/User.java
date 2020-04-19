@@ -42,7 +42,7 @@ public class User extends BaseEntity<UUID> implements UserDetails {
   private String password;
 
   @Column(name = "us_enabled")
-  private boolean enabled = true;
+  private boolean enabled;
 
   @Column(name = "us_acc_non_expired")
   private boolean accountNonExpired;

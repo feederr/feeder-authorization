@@ -13,11 +13,11 @@ public class UserBaseVO {
 
   private boolean enabled = true;
 
-  private boolean accountNonExpired;
+  private boolean accountNonExpired = true;
 
-  private boolean accountNonLocked;
+  private boolean accountNonLocked = true;
 
-  private boolean credentialsNonExpired;
+  private boolean credentialsNonExpired = true;
 
   @NotEmpty
   private Set<@NotBlank String> authorities;

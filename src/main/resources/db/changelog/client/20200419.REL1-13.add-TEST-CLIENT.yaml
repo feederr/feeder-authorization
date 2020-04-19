@@ -1,0 +1,46 @@
+databaseChangeLog:
+
+  - logicalFilePath: no-path
+
+  - changeSet:
+      id: add-test-client
+      author: voroshen.av@gmail.com
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT count(*) FROM oauth_client WHERE oc_client_id = 'TEST_CLIENT'
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: oc_id
+                  value: uuid()
+              - column:
+                  name: oc_client_id
+                  value: TEST_CLIENT
+              - column:
+                  name: oc_secret
+                  value: $2y$12$t2haD4a.iIsUUWKroOeFrejq5MVpL0kS.pyl7YhYNGJlEfWpXenCO
+              - column:
+                  name: oc_resource_ids
+                  value: authorization,application,statistics
+              - column:
+                  name: oc_scope
+                  value: test_scope
+              - column:
+                  name: oc_authorized_grant_types
+                  value: password,refresh_token,client_credentials,authorization_code
+              - column:
+                  name: oc_authorities
+                  value: test_authority
+              - column:
+                  name: oc_access_token_expiration
+                  value: 900
+              - column:
+                  name: oc_created
+                  value: now()
+              - column:
+                  name: oc_modified
+                  value: now()
+            tableName: oauth_client

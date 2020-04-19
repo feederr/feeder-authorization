@@ -51,7 +51,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                   name: us_pass
-                  type: VARCHAR(30)
+                  type: VARCHAR(60)
               - column:
                   constraints:
                     nullable: false
