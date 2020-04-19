@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+// CHECKSTYLE:OFF
 @Configuration
 @EnableWebSecurity
 // NOTE: temporary solution to place filter before Authorization Server Filter and Resource Service Filter
@@ -34,3 +35,4 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         .anyRequest().permitAll();
   }
 }
+// CHECKSTYLE:ON

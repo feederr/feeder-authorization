@@ -69,7 +69,7 @@
         <configuration>
           <configLocation>google-checkstyle.xml</configLocation>
           <consoleOutput>true</consoleOutput>
-          <violationSeverity>warning</violationSeverity>
+<!--          <violationSeverity>warning</violationSeverity>-->
           <failOnViolation>true</failOnViolation>
         </configuration>
         <executions>
