@@ -40,14 +40,5 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
   protected void configure(AuthenticationManagerBuilder builder) {
     builder.userDetailsService(userService);
   }
-
-  @Override
-  @SneakyThrows
-  protected void configure(HttpSecurity http) {
-
-    http.csrf().disable()
-        .sessionManagement()
-        .sessionCreationPolicy(SessionCreationPolicy.NEVER);
-  }
 }
 // CHECKSTYLE:ON
