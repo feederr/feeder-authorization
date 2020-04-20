@@ -8,11 +8,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import java.util.UUID;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.feeder.api.authorization.user.entity.User;
 import org.feeder.api.authorization.user.service.UserService;
 import org.feeder.api.authorization.user.vo.UserRequestVO;
 import org.feeder.api.authorization.user.vo.UserResponseVO;
-import org.feeder.api.core.service.BaseCrudService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -32,29 +30,29 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
   protected static final String USER_PATH = "/user";
+  private static final String ID_PATH = "/{id}";
   private final UserService service;
-  protected static final String ID_PATH = "/{id}";
 
   @PostMapping
   public ResponseEntity<UserResponseVO> create(@Valid @RequestBody final UserRequestVO vo) {
     UUID id = UUID.randomUUID();
     return ResponseEntity.status(CREATED)
         .contentType(APPLICATION_JSON)
-        .body(getService().create(vo, id));
+        .body(service.create(vo, id));
   }
 
   @GetMapping(ID_PATH)
   public ResponseEntity<UserResponseVO> get(@PathVariable final UUID id) {
     return ResponseEntity.status(OK)
         .contentType(APPLICATION_JSON)
-        .body(getService().get(id));
+        .body(service.get(id));
   }
 
   @GetMapping
   public ResponseEntity<Page<UserResponseVO>> getPage(@PageableDefault final Pageable pageable) {
     return ResponseEntity.status(OK)
         .contentType(APPLICATION_JSON)
-        .body(getService().getAll(pageable));
+        .body(service.getAll(pageable));
   }
 
   @PutMapping(ID_PATH)
@@ -63,17 +61,13 @@ public class UserController {
       @Valid @RequestBody final UserRequestVO vo) {
     return ResponseEntity.status(OK)
         .contentType(APPLICATION_JSON)
-        .body(getService().update(vo, id));
+        .body(service.update(vo, id));
   }
 
   @DeleteMapping(ID_PATH)
   public ResponseEntity<UserResponseVO> delete(@PathVariable final UUID id) {
-    getService().delete(id);
+    service.delete(id);
     return ResponseEntity.status(NO_CONTENT)
         .build();
-  }
-
-  protected BaseCrudService<User, UserRequestVO, UserResponseVO> getService() {
-    return service;
   }
 }

@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(CLIENT_PATH)
 public class ClientController {
 
-  protected static final String ID_PATH = "/{id}";
+  private static final String ID_PATH = "/{id}";
   protected static final String CLIENT_PATH = "/client";
   private final ClientService service;
 
@@ -40,21 +40,21 @@ public class ClientController {
     UUID id = UUID.randomUUID();
     return ResponseEntity.status(CREATED)
         .contentType(APPLICATION_JSON)
-        .body(getService().create(vo, id));
+        .body(service.create(vo, id));
   }
 
   @GetMapping(ID_PATH)
   public ResponseEntity<ClientResponseVO> get(@PathVariable final UUID id) {
     return ResponseEntity.status(OK)
         .contentType(APPLICATION_JSON)
-        .body(getService().get(id));
+        .body(service.get(id));
   }
 
   @GetMapping
   public ResponseEntity<Page<ClientResponseVO>> getPage(@PageableDefault final Pageable pageable) {
     return ResponseEntity.status(OK)
         .contentType(APPLICATION_JSON)
-        .body(getService().getAll(pageable));
+        .body(service.getAll(pageable));
   }
 
   @PutMapping(ID_PATH)
@@ -63,17 +63,17 @@ public class ClientController {
       @Valid @RequestBody final ClientRequestVO vo) {
     return ResponseEntity.status(OK)
         .contentType(APPLICATION_JSON)
-        .body(getService().update(vo, id));
+        .body(service.update(vo, id));
   }
 
   @DeleteMapping(ID_PATH)
   public ResponseEntity<ClientResponseVO> delete(@PathVariable final UUID id) {
-    getService().delete(id);
+    service.delete(id);
     return ResponseEntity.status(NO_CONTENT)
         .build();
   }
 
-  protected BaseCrudService<Client, ClientRequestVO, ClientResponseVO> getService() {
+  protected BaseCrudService<Client, ClientRequestVO, ClientResponseVO> service {
     return service;
   }
 }
