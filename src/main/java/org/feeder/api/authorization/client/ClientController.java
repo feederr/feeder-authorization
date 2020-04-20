@@ -8,11 +8,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import java.util.UUID;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.feeder.api.authorization.client.entity.Client;
 import org.feeder.api.authorization.client.service.ClientService;
 import org.feeder.api.authorization.client.vo.ClientRequestVO;
 import org.feeder.api.authorization.client.vo.ClientResponseVO;
-import org.feeder.api.core.service.BaseCrudService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -71,9 +69,5 @@ public class ClientController {
     service.delete(id);
     return ResponseEntity.status(NO_CONTENT)
         .build();
-  }
-
-  protected BaseCrudService<Client, ClientRequestVO, ClientResponseVO> service {
-    return service;
   }
 }
