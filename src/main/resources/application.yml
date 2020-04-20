@@ -34,8 +34,8 @@ feeder:
 
 logging:
   level:
+    #    org.springframework.security: DEBUG
     org.feeder: DEBUG
     org.springframework: WARN
-    org.springframework.security: DEBUG
     org.hibernate: WARN
     liquibase: WARN
