@@ -1,6 +1,7 @@
 package org.feeder.api.authorization.configuration;
 
 import lombok.extern.slf4j.Slf4j;
+import org.feeder.api.authorization.token.CustomTokenEnhancer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -19,7 +20,7 @@ public class AccessTokenConverterConfiguration {
 
       log.debug("Using MAC based access token signature");
 
-      JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+      JwtAccessTokenConverter converter = new CustomTokenEnhancer();
       converter.setSigningKey("local_signing_key");
 
       return converter;
@@ -36,7 +37,7 @@ public class AccessTokenConverterConfiguration {
 
       log.debug("Using RSA based access token signature");
 
-      JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+      JwtAccessTokenConverter converter = new CustomTokenEnhancer();
 //      converter.setKeyPair(); TODO: add KeyPair generation
 
       return converter;
