@@ -38,8 +38,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     configurer.authenticationManager(authenticationManager)
         .userDetailsService(userService)
         .accessTokenConverter(accessTokenConverter);
-//        .tokenEnhancer() TODO: add in future
-//        .exceptionTranslator() TODO: add in future
   }
 
   @Override
