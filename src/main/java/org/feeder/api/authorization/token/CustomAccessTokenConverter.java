@@ -1,10 +1,9 @@
 package org.feeder.api.authorization.token;
 
-import java.util.HashMap;
 import java.util.Map;
 import org.feeder.api.authorization.user.entity.User;
-import org.feeder.api.core.tenancy.AccessTokenHelper;
-import org.feeder.api.core.tenancy.AccessTokenHelper.AccessTokenType;
+import org.feeder.api.core.util.AccessTokenHelper;
+import org.feeder.api.core.util.AccessTokenHelper.AccessTokenType;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -31,16 +30,16 @@ public class CustomAccessTokenConverter extends JwtAccessTokenConverter {
   }
 
   private Map<String, Object> getAdditionalInfo() {
-    return new HashMap<>() {{
-      put(AccessTokenHelper.TOKEN_TYPE_KEY, AccessTokenType.CLIENT);
-    }};
+    return Map.of(
+        AccessTokenHelper.TOKEN_TYPE_KEY, AccessTokenType.CLIENT
+    );
   }
 
   private Map<String, Object> getAdditionalInfo(User user) {
-    return new HashMap<>() {{
-      put(AccessTokenHelper.TOKEN_TYPE_KEY, AccessTokenType.USER);
-      put(AccessTokenHelper.USER_ID_KEY, user.getId());
-      put(AccessTokenHelper.USER_NAME_KEY, user.getUsername());
-    }};
+    return Map.of(
+        AccessTokenHelper.TOKEN_TYPE_KEY, AccessTokenType.USER,
+        AccessTokenHelper.USER_ID_KEY, user.getId(),
+        AccessTokenHelper.USER_NAME_KEY, user.getUsername()
+    );
   }
 }
