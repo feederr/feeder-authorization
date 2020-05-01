@@ -31,8 +31,8 @@ spring:
 feeder:
   security:
     hierarchy.authorityPattern: >
-      *:client-admin > *:client-protected > *:client-delete > *:client-create > *:client-write > *:client-read
-      *:admin > *:protected > *:delete > *:create > *:write > *:read
+      *:client-admin > *:client-delete > *:client-write > *:client-read
+      *:admin > *:delete > *:write > *:read
   authorization:
     bcrypt-strength: 12
 
