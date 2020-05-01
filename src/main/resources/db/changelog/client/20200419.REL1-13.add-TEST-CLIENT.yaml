@@ -33,7 +33,7 @@ databaseChangeLog:
                   value: password,refresh_token,client_credentials,authorization_code
               - column:
                   name: oc_authorities
-                  value: test_authority
+                  value: client:client-admin
               - column:
                   name: oc_access_token_expiration
                   value: 900
