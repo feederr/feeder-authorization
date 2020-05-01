@@ -31,7 +31,7 @@ databaseChangeLog:
                   type: VARCHAR(30)
               - column:
                   name: oat_token_type
-                  type: ENUM('USER', 'CLIENT')
+                  type: VARCHAR(40)
               - column:
                   name: oat_expiration
                   type: datetime
