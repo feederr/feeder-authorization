@@ -29,6 +29,11 @@ spring:
     enabled: true
 
 feeder:
+  scheduling:
+    task:
+      clean-access-token: 0 */15 * * * *
+      clean-refresh-token: 0 0 0 ? * *
+    enabled: true
   security:
     hierarchy.authorityPattern: >
       *:client-admin > *:client-delete > *:client-write > *:client-read

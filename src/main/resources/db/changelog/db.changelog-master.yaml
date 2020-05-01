@@ -49,3 +49,11 @@ databaseChangeLog:
   - include:
       file: role/20200105.REL1-29.add-USER-role.yaml
       relativeToChangelogFile: true
+
+  - include:
+      file: token/20200502.REL1-24.create-refresh-token-table.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: token/20200502.REL1-24.create-access-token-table.yaml
+      relativeToChangelogFile: true

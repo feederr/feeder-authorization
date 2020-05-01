@@ -1,0 +1,38 @@
+databaseChangeLog:
+
+  - logicalFilePath: no-path
+
+  - changeSet:
+      id: create-access-token
+      author: voroshen.av@gmail.com
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: oat_id
+                  type: BINARY(16)
+              - column:
+                  name: oat_username
+                  type: VARCHAR(30)
+              - column:
+                  name: us_id
+                  type: BINARY(16)
+              - column:
+                  name: oc_client_id
+                  type: VARCHAR(100)
+              - column:
+                  name: oat_refresh_token_id
+                  type: BINARY(16)
+              - column:
+                  name: oat_user_role
+                  type: VARCHAR(30)
+              - column:
+                  name: oat_token_type
+                  type: VARCHAR(40)
+              - column:
+                  name: oat_expiration
+                  type: datetime
+            tableName: oauth_access_token
