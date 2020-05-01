@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 
 @Configuration
 @RequiredArgsConstructor
@@ -26,6 +27,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
   private final AccessTokenConverter accessTokenConverter;
 
+  private final TokenStore tokenStore;
+
   @Override
   @SneakyThrows
   public void configure(ClientDetailsServiceConfigurer configurer) {
@@ -36,6 +39,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
   @SneakyThrows
   public void configure(AuthorizationServerEndpointsConfigurer configurer) {
     configurer.authenticationManager(authenticationManager)
+        .tokenStore(tokenStore)
         .userDetailsService(userService)
         .accessTokenConverter(accessTokenConverter);
   }

@@ -1,0 +1,29 @@
+databaseChangeLog:
+
+  - logicalFilePath: no-path
+
+  - changeSet:
+      id: create-refresh-token
+      author: voroshen.av@gmail.com
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: ort_id
+                  type: BINARY(16)
+              - column:
+                  name: ort_username
+                  type: VARCHAR(30)
+              - column:
+                  name: us_id
+                  type: BINARY(16)
+              - column:
+                  name: ort_token_type
+                  type: ENUM('USER', 'CLIENT')
+              - column:
+                  name: ort_expiration
+                  type: datetime
+            tableName: oauth_refresh_token
