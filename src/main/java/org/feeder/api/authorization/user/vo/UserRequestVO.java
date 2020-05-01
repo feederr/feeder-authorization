@@ -1,13 +1,13 @@
 package org.feeder.api.authorization.user.vo;
 
-import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.feeder.api.authorization.validation.ValidPassword;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class UserRequestVO extends UserBaseVO {
 
-  @NotEmpty
+  @ValidPassword
   private String password;
 }

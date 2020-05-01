@@ -21,7 +21,7 @@ databaseChangeLog:
                   value: TEST_CLIENT
               - column:
                   name: oc_secret
-                  value: $2y$12$ud7zKyu/NWzEdvulqQIm7.832NwEdtWS0MfK3jIeLEURUgpVZd/Ua
+                  value: $2y$12$BcNjN0e7SEX9EGa4bV.qluB32qQoP6LHxgsmrHK9Vgqx.kPLxqkT.
               - column:
                   name: oc_resource_ids
                   value: authorization,application,statistics

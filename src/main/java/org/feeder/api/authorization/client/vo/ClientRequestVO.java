@@ -1,15 +1,13 @@
 package org.feeder.api.authorization.client.vo;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.feeder.api.authorization.validation.ValidPassword;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class ClientRequestVO extends ClientBaseVO {
 
-  @NotBlank
-  @Size(max = 60)
+  @ValidPassword
   private String clientSecret;
 }
