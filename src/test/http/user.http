@@ -7,9 +7,7 @@ Authorization: Bearer {{accessToken}}
 {
   "username": "TEST_USER",
   "password": "Yk+bmvjt~W9NLdDY",
-  "authorities": [
-    "user:admin"
-  ]
+  "role": "ADMIN"
 }
 
 > {%

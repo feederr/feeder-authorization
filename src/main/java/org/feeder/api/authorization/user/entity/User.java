@@ -6,16 +6,18 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.feeder.api.core.converter.SetToStringConverter;
+import org.feeder.api.authorization.role.entity.Role;
 import org.feeder.api.core.domain.BaseEntity;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -53,10 +55,14 @@ public class User extends BaseEntity<UUID> implements UserDetails {
   @Column(name = "us_cred_non_expired")
   private boolean credentialsNonExpired;
 
-  @NotEmpty
-  @Column(name = "us_authorities")
-  @Convert(converter = SetToStringConverter.class)
-  private Set<@NotBlank String> authorities;
+  @NotNull
+  @ManyToOne(cascade = {
+      CascadeType.PERSIST,
+      CascadeType.REFRESH,
+      CascadeType.MERGE
+  })
+  @JoinColumn(name = "ro_id")
+  private Role role;
 
   @EqualsAndHashCode.Exclude
   @CreatedDate
@@ -73,8 +79,8 @@ public class User extends BaseEntity<UUID> implements UserDetails {
 
     Set<GrantedAuthority> result = new LinkedHashSet<>();
 
-    if (!authorities.isEmpty()) {
-      result = authorities.stream()
+    if (!role.getAuthorities().isEmpty()) {
+      result = role.getAuthorities().stream()
           .map(SimpleGrantedAuthority::new)
           .collect(Collectors.toCollection(LinkedHashSet::new));
     }

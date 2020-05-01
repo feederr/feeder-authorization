@@ -1,0 +1,38 @@
+databaseChangeLog:
+
+  - logicalFilePath: no-path
+
+  - changeSet:
+      id: drop-authorities-column
+      author: voroshen.av@gmail.com
+      preConditions:
+        - onFail: MARK_RAN
+        - columnExists:
+            columnName: us_authorities
+            tableName: user
+      changes:
+        - dropColumn:
+            columns:
+              - column:
+                  name: us_authorities
+                  type: VARCHAR(1024)
+            tableName: user
+
+  - changeSet:
+      id: add-role-id-column
+      author: voroshen.av@gmail.com
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                columnName: ro_id
+                tableName: user
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: ro_id
+                  type: BINARY(16)
+            tableName: user

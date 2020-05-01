@@ -1,0 +1,21 @@
+databaseChangeLog:
+
+    - logicalFilePath: no-path
+
+    - changeSet:
+        id: add-foreign-key-role-user
+        author: voroshen.av@gmail.com
+        preConditions:
+          - onFail: MARK_RAN
+          - not:
+              - foreignKeyConstraintExists:
+                  foreignKeyName: fk_user_role
+        changes:
+          - addForeignKeyConstraint:
+              baseColumnNames: ro_id
+              baseTableName: user
+              constraintName: fk_user_role
+              onDelete: NO ACTION
+              onUpdate: NO ACTION
+              referencedColumnNames: ro_id
+              referencedTableName: role

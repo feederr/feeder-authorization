@@ -7,7 +7,6 @@ import org.feeder.api.authorization.client.vo.ClientRequestVO;
 import org.feeder.api.authorization.client.vo.ClientResponseVO;
 import org.feeder.api.core.mapper.BaseMapper;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -23,12 +22,8 @@ public class ClientMapper implements BaseMapper<Client, ClientRequestVO, ClientR
 
     mapper.getConfiguration().setMatchingStrategy(STRICT);
 
-    mapper.addMappings(new PropertyMap<ClientRequestVO, Client>() {
-      @Override
-      protected void configure() {
-        skip().setClientSecret(null);
-      }
-    });
+    mapper.createTypeMap(ClientRequestVO.class, Client.class)
+        .addMappings(m -> m.skip(Client::setClientSecret));
 
     this.encoder = encoder;
   }

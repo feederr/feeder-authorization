@@ -25,3 +25,27 @@ databaseChangeLog:
   - include:
       file: uuid/20200501.REL1-33.create-functions-for-uuid-manipulations.yaml
       relativeToChangelogFile: true
+
+  - include:
+      file: role/20200105.REL1-29.create-role-table.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: role/20200105.REL1-29.add-unique-constraint-on-role-name.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: user/20200105.REL1-29.add-role-id-to-user.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: user/20200105.REL1-29.add-role-foreign-key.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: role/20200105.REL1-29.add-ADMIN-role.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: role/20200105.REL1-29.add-USER-role.yaml
+      relativeToChangelogFile: true
