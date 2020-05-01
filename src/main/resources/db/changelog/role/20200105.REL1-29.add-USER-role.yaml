@@ -15,17 +15,11 @@ databaseChangeLog:
             columns:
               - column:
                   name: ro_id
-                  value: ${optimized_uuid}
+                  valueComputed: ${optimized_uuid}
               - column:
                   name: ro_name
                   value: USER
               - column:
                   name: ro_authorities
                   value: user:write,client:write,item:write,source:write
-              - column:
-                  name: ro_created
-                  value: now()
-              - column:
-                  name: ro_modified
-                  value: now()
             tableName: role
