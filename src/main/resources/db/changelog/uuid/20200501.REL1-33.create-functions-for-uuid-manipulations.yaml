@@ -1,0 +1,59 @@
+databaseChangeLog:
+
+  - logicalFilePath: no-path
+
+  - property:
+      name: optimized_uuid
+      dbms: mysql
+      value: optimized_uuid_bin(uuid())
+
+  - changeSet:
+      id: uuid-to-bin
+      author: voroshen.av@gmail.com
+      changes:
+        - sql:
+            dbms: mysql
+            sql: >
+              CREATE FUNCTION uuid_bin(_uuid VARCHAR(36))
+                RETURNS BINARY(16)
+                LANGUAGE SQL  DETERMINISTIC  CONTAINS SQL  SQL SECURITY INVOKER
+              RETURN
+                UNHEX(REPLACE(_uuid, '-', ''));
+
+  - changeSet:
+      id: bin-to-uuid
+      author: voroshen.av@gmail.com
+      changes:
+        - sql:
+            dbms: mysql
+            sql: >
+              CREATE FUNCTION bin_uuid(_bin BINARY(16))
+                RETURNS VARCHAR(36)
+                LANGUAGE SQL  DETERMINISTIC  CONTAINS SQL  SQL SECURITY INVOKER
+              RETURN
+                  LOWER(CONCAT(
+                      SUBSTR(HEX(_bin), 1, 8), '-',
+                      SUBSTR(HEX(_bin), 9, 4), '-',
+                      SUBSTR(HEX(_bin), 13, 4), '-',
+                      SUBSTR(HEX(_bin), 17, 4), '-',
+                      SUBSTR(HEX(_bin), 21)
+                  ));
+
+  - changeSet:
+      id: optimized-uuid-bin
+      author: voroshen.av@gmail.com
+      changes:
+        - sql:
+            dbms: mysql
+            sql: >
+              CREATE FUNCTION optimized_uuid_bin(_uuid VARCHAR(36))
+                RETURNS BINARY(16)
+                LANGUAGE SQL  DETERMINISTIC  CONTAINS SQL  SQL SECURITY INVOKER
+              RETURN
+                  UNHEX(CONCAT(
+                      SUBSTR(_uuid, 15, 4),
+                      SUBSTR(_uuid, 10, 4),
+                      SUBSTR(_uuid,  1, 8),
+                      SUBSTR(_uuid, 20, 4),
+                      SUBSTR(_uuid, 25)
+                  ));

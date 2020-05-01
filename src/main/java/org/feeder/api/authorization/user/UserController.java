@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.feeder.api.authorization.user.service.UserService;
 import org.feeder.api.authorization.user.vo.UserRequestVO;
 import org.feeder.api.authorization.user.vo.UserResponseVO;
+import org.feeder.api.core.util.UUIDUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -35,7 +36,7 @@ public class UserController {
 
   @PostMapping
   public ResponseEntity<UserResponseVO> create(@Valid @RequestBody final UserRequestVO vo) {
-    UUID id = UUID.randomUUID();
+    UUID id = UUIDUtils.optimizedUUID();
     return ResponseEntity.status(CREATED)
         .contentType(APPLICATION_JSON)
         .body(service.create(vo, id));

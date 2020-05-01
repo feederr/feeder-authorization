@@ -22,3 +22,6 @@ databaseChangeLog:
       file: client/20200419.REL1-13.add-TEST-CLIENT.yaml
       relativeToChangelogFile: true
 
+  - include:
+      file: uuid/20200501.REL1-33.create-functions-for-uuid-manipulations.yaml
+      relativeToChangelogFile: true
