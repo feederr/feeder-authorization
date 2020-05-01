@@ -1,0 +1,20 @@
+databaseChangeLog:
+
+  - logicalFilePath: no-path
+
+  - changeSet:
+      id: add-unique-constraint-on-role-name
+      author: voroshen.av@gmail.com
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - indexExists:
+                indexName: idx_role_ro_name
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: ro_name
+            indexName: idx_role_ro_name
+            tableName: role
+            unique: true

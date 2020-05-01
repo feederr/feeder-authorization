@@ -1,7 +1,5 @@
 package org.feeder.api.authorization.user.vo;
 
-import java.util.Set;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
@@ -18,7 +16,4 @@ public class UserBaseVO {
   private boolean accountNonLocked = true;
 
   private boolean credentialsNonExpired = true;
-
-  @NotEmpty
-  private Set<@NotBlank String> authorities;
 }

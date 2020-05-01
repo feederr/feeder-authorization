@@ -1,0 +1,25 @@
+databaseChangeLog:
+
+  - logicalFilePath: no-path
+
+  - changeSet:
+      id: add-admin-role
+      author: voroshen.av@gmail.com
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT count(*) FROM role WHERE ro_name = 'ADMIN'
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: ro_id
+                  valueComputed: ${optimized_uuid}
+              - column:
+                  name: ro_name
+                  value: ADMIN
+              - column:
+                  name: ro_authorities
+                  value: user:admin,client:admin,item:admin,source:admin
+            tableName: role

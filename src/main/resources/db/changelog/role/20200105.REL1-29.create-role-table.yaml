@@ -1,0 +1,35 @@
+databaseChangeLog:
+
+  - logicalFilePath: no-path
+
+  - changeSet:
+      id: create-role
+      author: voroshen.av@gmail.com
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: ro_id
+                  type: BINARY(16)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: ro_name
+                  type: VARCHAR(30)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: ro_authorities
+                  type: VARCHAR(1024)
+              - column:
+                  name: ro_created
+                  defaultValueComputed: now()
+                  type: datetime
+              - column:
+                  name: ro_modified
+                  defaultValueComputed: now()
+                  type: datetime
+            tableName: role
