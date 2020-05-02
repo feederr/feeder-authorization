@@ -31,7 +31,7 @@
     <dependency>
       <groupId>org.feeder.api</groupId>
       <artifactId>core</artifactId>
-      <version>0.7.1</version>
+      <version>0.8.0</version>
     </dependency>
 
     <dependency>

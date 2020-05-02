@@ -1,0 +1,39 @@
+### CREATE ROLE
+
+POST {{authorization}}/role HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "name": "TEST_ROLE",
+  "authorities": [
+    "test:admin",
+    "test:client-admin"
+  ]
+}
+
+> {%
+    if(response.body["id"]) {
+       client.global.set("roleId", response.body.id);
+    }
+%}
+
+### GET ROLE
+
+GET {{authorization}}/role/{{roleId}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+### GET ROLES
+
+GET {{authorization}}/role HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+### DELETE ROLE
+
+DELETE {{authorization}}/role/{{roleId}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+###

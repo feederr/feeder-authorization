@@ -1,0 +1,13 @@
+### LOGOUT USER
+
+POST {{authorization}}/logout/user
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+### LOGOUT CLIENT
+
+POST {{authorization}}/logout/client
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+###
