@@ -56,8 +56,6 @@ public class RefreshTokenMapper {
 
         refreshToken.setExpiration(expLocalDateTime);
       }
-
-      refreshToken.setNew(true);
     });
 
     return refreshToken;

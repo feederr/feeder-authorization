@@ -16,10 +16,13 @@ import org.feeder.api.authorization.token.mapper.RefreshTokenMapper;
 import org.feeder.api.core.util.TokenHelper.TokenType;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2RefreshToken;
+import org.springframework.security.oauth2.common.exceptions.InvalidTokenException;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class CustomJwtTokenStore extends JwtTokenStore {
@@ -46,14 +49,17 @@ public class CustomJwtTokenStore extends JwtTokenStore {
   }
 
   @Override
+  @Transactional(propagation = Propagation.REQUIRED)
   public void storeAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {
 
     AccessToken accessToken = accessTokenMapper.map(token);
 
     if (accessToken.getTokenType() != TokenType.CLIENT
         && Objects.nonNull(token.getRefreshToken())) {
+
       RefreshToken refreshToken = refreshTokenMapper.map(token.getRefreshToken());
       refreshTokenRepository.save(refreshToken);
+
       accessToken.setRefreshTokenId(refreshToken.getId());
     }
 
@@ -61,6 +67,23 @@ public class CustomJwtTokenStore extends JwtTokenStore {
   }
 
   @Override
+  @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+  public OAuth2AccessToken readAccessToken(String tokenValue) {
+
+    Optional<Map<String, Object>> claims = getClaims(tokenValue);
+
+    claims.ifPresent(map -> {
+      UUID accessTokenId = optimizedUUIDFrom(fromString(getClaim(map, JTI_KEY)));
+      if (!accessTokenRepository.existsById(accessTokenId)) {
+        throw new InvalidTokenException("Access token expired"); // TODO: implement custom exception
+      }
+    });
+
+    return super.readAccessToken(tokenValue);
+  }
+
+  @Override
+  @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
   public OAuth2RefreshToken readRefreshToken(String tokenValue) {
 
     Optional<Map<String, Object>> claims = getClaims(tokenValue);
@@ -68,7 +91,8 @@ public class CustomJwtTokenStore extends JwtTokenStore {
     claims.ifPresent(map -> {
       UUID refreshTokenId = optimizedUUIDFrom(fromString(getClaim(map, JTI_KEY)));
       if (!refreshTokenRepository.existsById(refreshTokenId)) {
-        throw new RuntimeException("Unauthorized"); // TODO: implement custom exception
+        throw new InvalidTokenException(
+            "Refresh token expired"); // TODO: implement custom exception
       }
     });
 
@@ -76,18 +100,21 @@ public class CustomJwtTokenStore extends JwtTokenStore {
   }
 
   @Override
+  @Transactional(propagation = Propagation.REQUIRED)
   public void removeAccessToken(OAuth2AccessToken token) {
     AccessToken accessToken = accessTokenMapper.map(token);
     accessTokenRepository.deleteById(accessToken.getId());
   }
 
   @Override
+  @Transactional(propagation = Propagation.REQUIRED)
   public void removeRefreshToken(OAuth2RefreshToken token) {
     RefreshToken refreshToken = refreshTokenMapper.map(token);
     refreshTokenRepository.deleteById(refreshToken.getId());
   }
 
   @Override
+  @Transactional(propagation = Propagation.REQUIRED)
   public void removeAccessTokenUsingRefreshToken(OAuth2RefreshToken token) {
     RefreshToken refreshToken = refreshTokenMapper.map(token);
     accessTokenRepository.deleteByRefreshTokenId(refreshToken.getId());
