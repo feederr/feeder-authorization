@@ -65,8 +65,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         .checkTokenAccess("permitAll()");
   }
 
-  public static class CustomExceptionTranslator implements
-      WebResponseExceptionTranslator<OAuth2Exception> {
+  public static class CustomExceptionTranslator implements WebResponseExceptionTranslator<OAuth2Exception> {
 
     @Override
     @SneakyThrows
@@ -102,8 +101,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
       }
     }
 
-    public static class CustomOAuth2ExceptionSerializer extends
-        StdSerializer<CustomOAuth2Exception> {
+    public static class CustomOAuth2ExceptionSerializer extends StdSerializer<CustomOAuth2Exception> {
 
       private static final long serialVersionUID = -6536424010044954576L;
 
