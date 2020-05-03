@@ -36,7 +36,7 @@ public class RevokeAccessTokenTokenEventListener {
   @Async
   @EventListener
   @Transactional(propagation = Propagation.REQUIRED)
-  public void listRevokeUserAccessTokenEvent(RevokeUserAccessTokenEvent event) {
+  public void listenRevokeUserAccessTokenEvent(RevokeUserAccessTokenEvent event) {
 
     if (Objects.isNull(event.getUserId())) {
       throw new IllegalArgumentException("User id must not be null");
