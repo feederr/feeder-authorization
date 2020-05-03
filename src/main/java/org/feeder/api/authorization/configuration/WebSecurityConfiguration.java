@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @RequiredArgsConstructor
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-  @Value("${feeder.authorization.bcrypt-strength:12}")
+  @Value("${feeder.security.bcrypt-strength:12}")
   private int bCryptStrength;
 
   private final UserService userService;

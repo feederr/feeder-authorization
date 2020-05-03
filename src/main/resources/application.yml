@@ -35,10 +35,11 @@ feeder:
       clean-refresh-token: 0 0 0 ? * *
     enabled: true
   security:
+    jdbc-token-store:
+      enabled: true
     hierarchy.authorityPattern: >
       *:client-admin > *:client-delete > *:client-write > *:client-read
       *:admin > *:delete > *:write > *:read
-  authorization:
     bcrypt-strength: 12
 
 logging:
