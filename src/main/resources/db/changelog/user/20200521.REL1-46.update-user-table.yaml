@@ -1,0 +1,60 @@
+databaseChangeLog:
+
+  - logicalFilePath: no-path
+
+  - changeSet:
+      id: add-email-column-to-user
+      author: voroshen.av@gmail.com
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                columnName: us_email
+                tableName: user
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: us_email
+                  type: VARCHAR(64)
+            tableName: user
+
+  - changeSet:
+      id: add-firstname-column-to-user
+      author: voroshen.av@gmail.com
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                columnName: us_first_name
+                tableName: user
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: us_first_name
+                  type: VARCHAR(64)
+            tableName: user
+
+  - changeSet:
+      id: add-lastname-column-to-user
+      author: voroshen.av@gmail.com
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                columnName: us_last_name
+                tableName: user
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: us_last_name
+                  type: VARCHAR(64)
+            tableName: user

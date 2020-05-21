@@ -1,0 +1,33 @@
+databaseChangeLog:
+
+  - logicalFilePath: no-path
+
+  - changeSet:
+      id: rename-username-column-in-access-token-table
+      author: voroshen.av@gmail.com
+      preConditions:
+        - onFail: MARK_RAN
+        - columnExists:
+            columnName: oat_username
+            tableName: oauth_access_token
+      changes:
+        - renameColumn:
+            oldColumnName: oat_username
+            newColumnName: us_name
+            columnDataType: VARCHAR(30)
+            tableName: oauth_access_token
+
+  - changeSet:
+      id: rename-role-column-in-access-token-table
+      author: voroshen.av@gmail.com
+      preConditions:
+        - onFail: MARK_RAN
+        - columnExists:
+            columnName: oat_user_role
+            tableName: oauth_access_token
+      changes:
+        - renameColumn:
+            oldColumnName: oat_user_role
+            newColumnName: ro_name
+            columnDataType: VARCHAR(30)
+            tableName: oauth_access_token

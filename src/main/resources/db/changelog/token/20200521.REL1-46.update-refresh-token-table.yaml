@@ -1,0 +1,18 @@
+databaseChangeLog:
+
+  - logicalFilePath: no-path
+
+  - changeSet:
+      id: rename-username-column-in-refresh-token-table
+      author: voroshen.av@gmail.com
+      preConditions:
+        - onFail: MARK_RAN
+        - columnExists:
+            columnName: ort_username
+            tableName: oauth_refresh_token
+      changes:
+        - renameColumn:
+            oldColumnName: ort_username
+            newColumnName: us_name
+            columnDataType: VARCHAR(30)
+            tableName: oauth_refresh_token

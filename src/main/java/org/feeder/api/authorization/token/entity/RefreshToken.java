@@ -24,7 +24,7 @@ public class RefreshToken extends BaseEntity<UUID> {
   @Column(name = "ort_id")
   private UUID id;
 
-  @Column(name = "ort_username")
+  @Column(name = "us_name")
   private String username;
 
   @Column(name = "us_id")

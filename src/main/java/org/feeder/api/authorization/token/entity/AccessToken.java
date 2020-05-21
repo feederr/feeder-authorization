@@ -24,13 +24,13 @@ public class AccessToken extends BaseEntity<UUID> {
   @Column(name = "oat_id")
   private UUID id;
 
-  @Column(name = "oat_username")
+  @Column(name = "us_name")
   private String username;
 
   @Column(name = "us_id")
   private UUID userId;
 
-  @Column(name = "oat_user_role")
+  @Column(name = "ro_name")
   private String role;
 
   @Column(name = "oc_client_id")
