@@ -6,8 +6,11 @@ Authorization: Bearer {{accessToken}}
 
 {
   "username": "TEST_USER",
+  "email": "john.doe@example.com",
+  "firstName": "John",
+  "lastName": "Doe",
   "password": "Yk+bmvjt~W9NLdDY",
-  "role": "ADMIN"
+  "role": "USER"
 }
 
 > {%

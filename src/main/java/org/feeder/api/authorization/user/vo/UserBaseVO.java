@@ -1,19 +1,28 @@
 package org.feeder.api.authorization.user.vo;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.Data;
 
 @Data
 public class UserBaseVO {
 
   @NotEmpty
+  @Size(max = 30)
   private String username;
 
-  private boolean enabled = true;
+  @NotNull
+  @Email
+  @Size(max = 64)
+  private String email;
 
-  private boolean accountNonExpired = true;
+  @NotEmpty
+  @Size(max = 64)
+  private String firstName;
 
-  private boolean accountNonLocked = true;
-
-  private boolean credentialsNonExpired = true;
+  @NotEmpty
+  @Size(max = 64)
+  private String lastName;
 }
