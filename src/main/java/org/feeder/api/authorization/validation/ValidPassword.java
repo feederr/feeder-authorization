@@ -7,8 +7,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import javax.validation.ReportAsSingleViolation;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 /**
  * ^                 # start-of-string (?=.*[0-9])       # a digit must occur at least once
@@ -25,13 +25,12 @@ import javax.validation.constraints.Size;
 @Constraint(validatedBy = {})
 @Target({ElementType.FIELD, ElementType.ANNOTATION_TYPE})
 @Pattern(
-    regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$",
-    message = "Password is too weak. It should be at least 8 symbols, at least 1 digit, at least 1 lower&upper case letter and no whitespaces."
+    regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,30}$"
 )
-@Size(min = 8, max = 30)
+@ReportAsSingleViolation
 public @interface ValidPassword {
 
-  String message() default "Invalid Password";
+  String message() default "Password is too weak. It should be at least 8 symbols, at most 30 symbols, at least 1 digit, at least 1 lower&upper case letter and no whitespaces.";
 
   Class<?>[] groups() default {};
 
