@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -52,10 +53,12 @@ public class UserController {
   }
 
   @GetMapping
-  public ResponseEntity<Page<UserResponseVO>> getPage(@PageableDefault final Pageable pageable) {
+  public ResponseEntity<Page<UserResponseVO>> getPage(
+      @RequestParam(name = "q", required = false) String predicate,
+      @PageableDefault final Pageable pageable) {
     return ResponseEntity.status(OK)
         .contentType(APPLICATION_JSON)
-        .body(service.getAll(pageable));
+        .body(service.getAllBySpec(predicate, pageable));
   }
 
   @PutMapping(ID_PATH)
