@@ -9,8 +9,8 @@ import org.feeder.api.authorization.role.vo.RoleRequestVO;
 import org.feeder.api.authorization.role.vo.RoleResponseVO;
 import org.feeder.api.core.exception.EntityNotFoundException;
 import org.feeder.api.core.mapper.BaseMapper;
+import org.feeder.api.core.search.JpaSpecificationRepository;
 import org.feeder.api.core.service.BaseCrudService;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +38,7 @@ public class RoleService extends BaseCrudService<Role, RoleRequestVO, RoleRespon
   }
 
   @Override
-  protected JpaRepository<Role, UUID> getRepository() {
+  protected JpaSpecificationRepository<Role, UUID> getRepository() {
     return repository;
   }
 

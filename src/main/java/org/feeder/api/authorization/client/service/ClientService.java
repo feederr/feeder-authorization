@@ -8,8 +8,8 @@ import org.feeder.api.authorization.client.entity.Client;
 import org.feeder.api.authorization.client.vo.ClientRequestVO;
 import org.feeder.api.authorization.client.vo.ClientResponseVO;
 import org.feeder.api.core.mapper.BaseMapper;
+import org.feeder.api.core.search.JpaSpecificationRepository;
 import org.feeder.api.core.service.BaseCrudService;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.NoSuchClientException;
@@ -30,7 +30,7 @@ public class ClientService extends
   }
 
   @Override
-  protected JpaRepository<Client, UUID> getRepository() {
+  protected JpaSpecificationRepository<Client, UUID> getRepository() {
     return repository;
   }
 

@@ -9,8 +9,8 @@ import org.feeder.api.authorization.user.entity.User;
 import org.feeder.api.authorization.user.vo.UserRequestVO;
 import org.feeder.api.authorization.user.vo.UserResponseVO;
 import org.feeder.api.core.mapper.BaseMapper;
+import org.feeder.api.core.search.JpaSpecificationRepository;
 import org.feeder.api.core.service.BaseCrudService;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -51,7 +51,7 @@ public class UserService
   }
 
   @Override
-  protected JpaRepository<User, UUID> getRepository() {
+  protected JpaSpecificationRepository<User, UUID> getRepository() {
     return repository;
   }
 
